@@ -1,0 +1,26 @@
+[package]
+name = "embassy-hello-world"
+version = "0.1.0"
+edition = "2021"
+authors = ["You"]
+license = "MIT OR Apache-2.0"
+description = "Hello World for 4.0\" ESP32-4848S040 using Rust Embassy"
+
+[dependencies]
+esp-backtrace = { version = "0.15", features = ["esp32s3", "exception-handler", "panic-handler", "println"] }
+esp-hal = { version = "0.23", features = ["esp32s3", "unstable", "quad-psram"] }
+esp-println = { version = "0.13", default-features = false, features = ["esp32s3", "log", "jtag-serial", "critical-section", "colors"] }
+esp-alloc = { version = "0.6" }
+log = "0.4"
+embassy-executor = { version = "0.7", features = ["executor-thread", "nightly", "timer-item-payload-size-4"] }
+embassy-time = "0.4"
+esp-hal-embassy = { version = "0.6", features = ["esp32s3", "log"] }
+
+[profile.dev]
+opt-level = "s"
+
+[profile.release]
+opt-level = "s"
+codegen-units = 1
+debug = true
+lto = true
